@@ -1,3 +1,7 @@
+# This Github actions file will delete branches older than 15 days 
+
+name: "Delete stale branches older than 15 days"
+
 on:
   schedule:
     - cron: "0 0 * * *" # Everday at midnight
@@ -12,5 +16,6 @@ jobs:
           dry-run: false # Check out the console output before setting this to false
           exempt-organization: "acme-inc"
           exempt-authors-regex: "^dependabot"
-          days-before-branch-stale: 7
-          days-before-branch-delete: 7
+          days-before-branch-stale: 15
+          days-before-branch-delete: 15
+          exempt-protected-branches: true 
