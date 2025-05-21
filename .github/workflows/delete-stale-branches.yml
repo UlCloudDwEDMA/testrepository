@@ -10,6 +10,17 @@ jobs:
   remove-stale-branches:
     name: Remove Stale Branches
     runs-on: ubuntu-latest
+
+    steps:
+      # Run a set of commands using the runners shell
+      - name: Run a one-off command
+        run: |
+          echo "This is a one-off command"
+          echo "You can run any command here"
+          echo "This is just an example"
+          echo "You can also run scripts"
+
+          
     steps:
       - uses: fpicalausa/remove-stale-branches@v1.6.0
         with:
