@@ -21,7 +21,6 @@ jobs:
           echo "You can also run scripts"
 
           
-    steps:
       - uses: fpicalausa/remove-stale-branches@v1.6.0
         with:
           dry-run: false # Check out the console output before setting this to false
