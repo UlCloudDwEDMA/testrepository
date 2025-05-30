@@ -15,8 +15,8 @@ jobs:
 
       - name: Install GitHub CLI
         run: |
-          sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-key C99B11DEB97541F0
-          sudo apt-add-repository https://cli.github.com/packages
+          #sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-key C99B11DEB97541F0
+          #sudo apt-add-repository https://cli.github.com/packages
           sudo apt update
           sudo apt install gh -y
 
@@ -25,7 +25,7 @@ jobs:
 
       - name: Delete stale branches (excluding exempted)
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.CDW_GITHUB_TOKEN }}
           EXEMPT_BRANCHES: 'main dev feature01 qa testbranch03'
           STALE_DAYS: 30
         run: |
