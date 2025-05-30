@@ -2,8 +2,8 @@ name: Delete Stale Branches
 
 on:
   schedule:
-    - cron: '0 2 * * *' # Every Sunday at 2:00 AM UTC
-  workflow_dispatch:
+    - cron: '23 10 * * *' # Every Sunday at 2:00 AM UTC
+  #workflow_dispatch:
 
 jobs:
   delete-stale-branches:
