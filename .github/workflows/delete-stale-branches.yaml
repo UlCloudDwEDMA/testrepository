@@ -13,12 +13,19 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Set up GitHub CLI
-        uses: cli/cli-action@v2
+      - name: Install GitHub CLI
+        run: |
+          sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-key C99B11DEB97541F0
+          sudo apt-add-repository https://cli.github.com/packages
+          sudo apt update
+          sudo apt install gh -y
+
+      - name: Authenticate GitHub CLI
+        run: echo "${{ secrets.CDW_GITHUB_TOKEN }}" | gh auth login --with-token
 
       - name: Delete stale branches (excluding exempted)
         env:
-          GH_TOKEN: ${{ secrets.CDW_GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           EXEMPT_BRANCHES: 'main dev feature01 qa testbranch03'
           STALE_DAYS: 30
         run: |
@@ -31,7 +38,7 @@ jobs:
               continue
             fi
 
-            # Get branch last commit date
+            # Get the last commit date
             commit_date=$(gh api repos/${{ github.repository }}/commits/$branch -q '.commit.committer.date')
             commit_timestamp=$(date -d "$commit_date" +%s)
             now=$(date +%s)
@@ -44,4 +51,3 @@ jobs:
               echo "Branch $branch is not stale (last commit $age_days days ago)"
             fi
           done
-
