@@ -17,5 +17,5 @@ jobs:
         with:
           branches: |
             stale-branches
-          age: 30 days
+          age: 5 days
           dry-run: true 
