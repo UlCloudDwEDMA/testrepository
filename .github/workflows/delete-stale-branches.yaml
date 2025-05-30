@@ -33,6 +33,7 @@ jobs:
           branches=$(gh api repos/${{ github.repository }}/branches --paginate -q '.[].name')
 
           for branch in $branches; do
+            date
             if [[ " ${EXEMPT_BRANCHES[@]} " =~ " $branch " ]]; then
               echo "Skipping exempt branch: $branch"
               continue
@@ -42,7 +43,6 @@ jobs:
             commit_date=$(gh api repos/${{ github.repository }}/commits/$branch -q '.commit.committer.date')
             commit_timestamp=$(date -d "$commit_date" +%s)
             now=$(date +%s)
-            echo $now
             age_days=$(( (now - commit_timestamp) / 86400 ))
 
             if (( age_days > STALE_DAYS )); then
