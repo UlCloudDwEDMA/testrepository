@@ -25,7 +25,7 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.CDW_GITHUB_TOKEN }}
           EXEMPT_BRANCHES: 'main dev feature01 qa testbranch03'
-          STALE_DAYS: 30
+          STALE_DAYS: 10
         run: |
           echo "Fetching remote branches..."
           branches=$(gh api repos/${{ github.repository }}/branches --paginate -q '.[].name')
